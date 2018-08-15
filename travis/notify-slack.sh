@@ -23,7 +23,7 @@ if [ "$TRAVIS_TEST_RESULT" = "0" ]; then
       }
     ]
   }
-  EndOfMessage
+EndOfMessage
 else
   read -r -d '' PAYLOAD << EndOfMessage
   {
@@ -34,7 +34,7 @@ else
       }
     ]
   }
-  EndOfMessage
+EndOfMessage
 fi
 
 curl -X POST -H 'Content-type: application/json' --data "${PAYLOAD}" $SLACK_WEBHOOK_URL
