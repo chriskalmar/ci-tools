@@ -11,15 +11,24 @@ BUILD_URL=https://travis-ci.com/${TRAVIS_REPO_SLUG}/builds/${TRAVIS_BUILD_ID}
 COMPARE_URL=https://github.com/${TRAVIS_REPO_SLUG}/compare/${TRAVIS_COMMIT_RANGE}
 
 if [ "$TRAVIS_TEST_RESULT" = "0" ]; then
-  echo
-  echo "Commit message: ${TRAVIS_COMMIT_MESSAGE}"
-
   read -r -d '' PAYLOAD << EndOfSuccess
   {
     "attachments": [
       {
-        "text": "Build <${BUILD_URL}|#${TRAVIS_BUILD_ID}> (<${COMPARE_URL}|${COMMIT_HASH}>) of <b>${TRAVIS_REPO_SLUG}@${TRAVIS_BRANCH}</b> by ${AUTHOR} passed :the_horns:",
+        "text": "Build <${BUILD_URL}|#${TRAVIS_BUILD_ID}> (<${COMPARE_URL}|${COMMIT_HASH}>) of *${TRAVIS_REPO_SLUG}@${TRAVIS_BRANCH}* \nby ${AUTHOR} passed :the_horns: \nCommit message: _${TRAVIS_COMMIT_MESSAGE}_",
         "color": "good",
+        "fields": [
+          {
+            "title": "Docker Latest Tag",
+            "value": "${DOCKER_LATEST_TAG}",
+            "short": true
+          },
+          {
+            "title": "Docker Tag",
+            "value": "${DOCKER_TAG}",
+            "short": true
+          }
+        ],
       }
     ]
   }
@@ -29,7 +38,7 @@ else
   {
     "attachments": [
       {
-        "text": "Build <${BUILD_URL}|#${TRAVIS_BUILD_ID}> (<${COMPARE_URL}|${COMMIT_HASH}>) of <b>${TRAVIS_REPO_SLUG}@${TRAVIS_BRANCH}</b> by ${AUTHOR} failed :sob:",
+        "text": "Build <${BUILD_URL}|#${TRAVIS_BUILD_ID}> (<${COMPARE_URL}|${COMMIT_HASH}>) of *${TRAVIS_REPO_SLUG}@${TRAVIS_BRANCH}* \nby ${AUTHOR} failed :sob: \nCommit message: _${TRAVIS_COMMIT_MESSAGE}_",
         "color": "danger",
       }
     ]
