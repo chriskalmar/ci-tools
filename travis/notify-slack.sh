@@ -14,7 +14,7 @@ if [ "$TRAVIS_TEST_RESULT" = "0" ]; then
   echo
   echo "Commit message: ${TRAVIS_COMMIT_MESSAGE}"
 
-  read -r -d '' PAYLOAD << EndOfMessage
+  read -r -d '' PAYLOAD << EndOfSuccess
   {
     "attachments": [
       {
@@ -23,9 +23,9 @@ if [ "$TRAVIS_TEST_RESULT" = "0" ]; then
       }
     ]
   }
-EndOfMessage
+EndOfSuccess
 else
-  read -r -d '' PAYLOAD << EndOfMessage
+  read -r -d '' PAYLOAD << EndOfFailure
   {
     "attachments": [
       {
@@ -34,7 +34,7 @@ else
       }
     ]
   }
-EndOfMessage
+EndOfFailure
 fi
 
 curl -X POST -H 'Content-type: application/json' --data "${PAYLOAD}" $SLACK_WEBHOOK_URL
