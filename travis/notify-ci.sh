@@ -27,6 +27,7 @@ if [ "$TRAVIS_TEST_RESULT" = "0" ]; then
     "success": true,
     "service": "${TRAVIS_REPO_SLUG}",
     "dockerTag": "${DOCKER_TAG}",
+    "dockerLatest": "${DOCKER_LATEST_TAG}",
     "text": ":white_check_mark: \nBuild <${BUILD_URL}|#${TRAVIS_BUILD_ID}> (<${COMPARE_URL}|${COMMIT_HASH}>) of *${TRAVIS_REPO_SLUG}@${TRAVIS_BRANCH}* \nby ${AUTHOR} passed $EMOJI \n${TRAVIS_COMMIT_MESSAGE_NL}"
   }
 EndOfSuccess
