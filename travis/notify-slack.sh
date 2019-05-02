@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# skip pull requests by renovate bot
+if [[ $TRAVIS_PULL_REQUEST_BRANCH = renovate/* ]]; then exit 0; fi
+
 DOCKER_IMAGE=$TRAVIS_REPO_SLUG
 DOCKER_DEV_TAG=$([ "$TRAVIS_BRANCH" == "master" ] || echo "-dev")
 DOCKER_TAG=${TRAVIS_BUILD_NUMBER}-${TRAVIS_COMMIT:0:8}${DOCKER_DEV_TAG}
