@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# skip pull requests by renovate bot
+if [[ $TRAVIS_PULL_REQUEST_BRANCH = renovate/* ]]; then exit 0; fi
+
 echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
 
 DOCKER_IMAGE=$TRAVIS_REPO_SLUG
