@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # skip pull requests by renovate bot
-echo "TRAVIS_PULL_REQUEST_BRANCH: $TRAVIS_PULL_REQUEST_BRANCH"
-if [[ $TRAVIS_PULL_REQUEST_BRANCH = renovate/* ]]; then 
+echo "TRAVIS_PULL_REQUEST_BRANCH: ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH}"
+if [[ ${TRAVIS_PULL_REQUEST_BRANCH:-$TRAVIS_BRANCH} = renovate/* ]]; then
   echo 'skipping renovate bot PR'
   exit 0
 fi
